@@ -59,15 +59,7 @@ const SaleNft: FC = () => {
   useEffect(() => console.log(nftMetadataArray), [nftMetadataArray]);
 
   return (
-    <Flex
-      bgColor="red.100"
-      w="100%"
-      alignItems="center"
-      flexDir="column"
-      gap={2}
-      mt={8}
-      mb={20}
-    >
+    <Flex w="100%" alignItems="center" flexDir="column" gap={2} mt={8} mb={20}>
       {signer ? (
         <Grid
           templateColumns={[
@@ -84,9 +76,9 @@ const SaleNft: FC = () => {
               tokenId={tokenIds[i]}
               mintContract={mintContract}
               saleContract={saleContract}
-              nftMetadataArray={nftMetadataArray}
-              setNftMetadataArray={setNftMetadataArray}
               signer={signer}
+              getOnSaleTokens={getOnSaleTokens}
+              getNftMetadata={getNftMetadata}
             />
           ))}
         </Grid>
