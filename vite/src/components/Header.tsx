@@ -14,14 +14,25 @@ import { Dispatch, FC, SetStateAction, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import mintAbi from "../abis/mintAbi.json";
+import saleAbi from "../abis/saleAbi.json";
+import {
+  mintContractAddress,
+  saleContractAddress,
+} from "../abis/contractAddress";
 
 interface HeaderProps {
   signer: JsonRpcSigner | null;
   setSigner: Dispatch<SetStateAction<JsonRpcSigner | null>>;
   setMintContract: Dispatch<SetStateAction<Contract | null>>;
+  setSaleContract: Dispatch<SetStateAction<Contract | null>>;
 }
 
-const Header: FC<HeaderProps> = ({ signer, setSigner, setMintContract }) => {
+const Header: FC<HeaderProps> = ({
+  signer,
+  setSigner,
+  setMintContract,
+  setSaleContract,
+}) => {
   const navigate = useNavigate();
 
   const onClickMetamask = async () => {
@@ -43,20 +54,15 @@ const Header: FC<HeaderProps> = ({ signer, setSigner, setMintContract }) => {
       return;
     }
 
-    setMintContract(
-      new Contract(
-        "0xcE56E8a75CA106D05F4bcbdb360Eb1ACCbE3E084",
-        mintAbi,
-        signer
-      )
-    );
+    setMintContract(new Contract(mintContractAddress, mintAbi, signer));
+    setSaleContract(new Contract(saleContractAddress, saleAbi, signer));
   }, [signer]);
 
   return (
-    <Flex bgColor="blue.100" h={24} justifyContent="space-between">
+    <Flex h={24} justifyContent="space-between">
       <Flex
         flexDir={["column", "column", "row"]}
-        w={44}
+        w={40}
         fontSize={[16, 16, 20]}
         fontWeight="semibold"
         alignItems="center"
@@ -97,7 +103,7 @@ const Header: FC<HeaderProps> = ({ signer, setSigner, setMintContract }) => {
           마켓
         </Button>
       </Flex>
-      <Flex w={40} justifyContent="center" alignItems="center">
+      <Flex w={40} justifyContent="end" alignItems="center">
         {signer ? (
           <Menu>
             <MenuButton size={["xs", "xs", "md"]} as={Button}>
@@ -112,7 +118,7 @@ const Header: FC<HeaderProps> = ({ signer, setSigner, setMintContract }) => {
           </Menu>
         ) : (
           <Button onClick={onClickMetamask} size={["xs", "xs", "md"]}>
-            🦊지갑 연결
+            🦊 메마로그인
           </Button>
         )}
       </Flex>

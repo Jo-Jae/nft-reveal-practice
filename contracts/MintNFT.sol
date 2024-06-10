@@ -35,4 +35,6 @@ contract MintNft is ERC721Enumerable, Ownable {
         function setIsReveal() public onlyOwner {
         isRevealed = true;
     }
+
+    
 }
