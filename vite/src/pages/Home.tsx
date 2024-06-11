@@ -14,7 +14,7 @@ const Home: FC = () => {
       mb={20}
     >
       <Flex maxW={768} w="100%" height={200}>
-        <img src={unreveal} alt="슬라임이미지" />
+        <img width={768} src={unreveal} alt="슬라임이미지" />
       </Flex>
       <Flex>슬라임월드세계관</Flex>
       <Flex>설명</Flex>
